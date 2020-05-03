@@ -1,0 +1,89 @@
+<div class="login-page">
+    <mat-card class="mat-elevation-z12">
+        <mat-card-title style="text-align:center;">LogIn/SignUp</mat-card-title>
+        <mat-tab-group mat-stretch-tabs #tabGroup class="example-stretched-tabs">
+            <mat-tab label="Sign In">
+                <mat-card-content>
+                    <form #signinForm="ngForm" (ngSubmit)="onSignInSubmit(signinForm.value)">
+                        <mat-form-field>
+                            <input matInput placeholder="Email" required name="email" [pattern]="emailPattern" ngModel #email="ngModel">
+                            <mat-error *ngIf="email.errors?.required">Email is required</mat-error>
+                            <mat-error *ngIf="email.errors?.pattern">Not a valid email id</mat-error>
+                            <mat-icon matSuffix>email</mat-icon>
+                        </mat-form-field>
+                        <mat-form-field>
+                            <input matInput placeholder="Password" type="password" required minlength="6" name="password" ngModel #password="ngModel">
+                            <mat-error *ngIf="password.errors && password.errors.required">
+                                Password is required
+                            </mat-error>
+                            <mat-error *ngIf="password.errors && password.errors.minlength">
+                                Password must be of length 6
+                            </mat-error>
+                            <mat-icon matSuffix>lock</mat-icon>
+                        </mat-form-field>
+                        <mat-checkbox>Remember Me!</mat-checkbox>
+
+                        <button mat-raised-button color="primary" class="login-button" type="submit" [disabled]="!signinForm.form.valid">
+                            Sign In
+                        </button>
+
+                        <button mat-raised-button class="login-button" type="submit" [disabled]="!signinForm.form.valid">
+                            Login with Google
+                        </button>
+                    </form>
+
+                    <div *ngIf="signInError" align="center" style="color: #303F9F;">
+                        <b>{{signInErrorMsg}}</b>
+                    </div>
+                </mat-card-content>
+            </mat-tab>
+            <mat-tab label="Sign Up">
+                <mat-card-content>
+                    <form #signUpForm="ngForm" (ngSubmit)="onSignUpSubmit(signUpForm.value)">
+                        <mat-form-field>
+                            <input matInput placeholder="User Name" required name="username" [pattern]="unamePattern" ngModel #username="ngModel">
+                            <mat-icon matSuffix>perm_identity</mat-icon>
+                            <mat-error *ngIf="username.errors?.required">
+                                Username is required
+                            </mat-error>
+                            <mat-error *ngIf="username.errors?.pattern">
+                                Username is not acc. to required pattern
+                            </mat-error>
+                        </mat-form-field>
+                        <mat-form-field>
+                            <input matInput placeholder="Email" required name="email" [pattern]="emailPattern" ngModel #email="ngModel">
+                            <mat-error *ngIf="email.errors?.required">Email is required</mat-error>
+                            <mat-error *ngIf="email.errors?.pattern">Not a valid email id</mat-error>
+                            <mat-icon matSuffix>email</mat-icon>
+                        </mat-form-field>
+                        <mat-form-field>
+                            <input matInput placeholder="Password" type="password" required minlength="6" name="password" ngModel #password="ngModel">
+                            <mat-error *ngIf="password.errors && password.errors.required">
+                                Password is required
+                            </mat-error>
+                            <mat-error *ngIf="password.errors && password.errors.minlength">
+                                Password must be of length 6
+                            </mat-error>
+                            <mat-icon matSuffix>lock</mat-icon>
+
+                        </mat-form-field>
+                        <mat-form-field>
+                            <input matInput placeholder="Password" type="password" required minlength="6" name="repassword" ngModel #repassword="ngModel">
+                            <mat-error *ngIf="repassword.errors && repassword.errors.required">
+                                Re-Enter Password is required
+                            </mat-error>
+                            <mat-icon matSuffix>lock</mat-icon>
+                        </mat-form-field>
+                        <button mat-raised-button color="primary" class="login-button" type="submit" [disabled]="!signUpForm.form.valid">
+                            Sign Up
+                        </button>
+                    </form>
+
+                    <div *ngIf="signUpError" align="center" style="color: #303F9F;">
+                        <b>{{signUpErrorMsg}}</b>
+                    </div>
+                </mat-card-content>
+            </mat-tab>
+        </mat-tab-group>
+    </mat-card>
+</div>

@@ -1,0 +1,85 @@
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <h2 style="font-family: roboto; font-weight: bold; border-left: 10px solid #3f51b5">&nbsp; Operations</h2>
+        </div>
+    </div>
+    <br>
+    <mat-accordion>
+        <mat-expansion-panel>
+            <mat-expansion-panel-header>
+                <mat-panel-title>
+                    Withdraw
+                </mat-panel-title>
+                <mat-panel-description>
+                    Type amount to be withdrawn
+                </mat-panel-description>
+            </mat-expansion-panel-header>
+
+            <div class="row">
+                <div class="col-md-5">
+                    <mat-form-field>
+                        <mat-label>Amount</mat-label>
+                        <input #WithdrawAmount matInput type="number" min="1">
+                    </mat-form-field>
+                </div>
+                <div class="col-md-7">
+                    <button mat-raised-button color="primary" style="width: 20%;" (click)="withdraw(WithdrawAmount.value);">Withdraw</button>
+                </div>
+            </div>
+        </mat-expansion-panel>
+
+        <mat-expansion-panel>
+            <mat-expansion-panel-header>
+                <mat-panel-title>
+                    Deposit &nbsp;
+                </mat-panel-title>
+                <mat-panel-description>
+                    Type amount to be deposited
+                </mat-panel-description>
+            </mat-expansion-panel-header>
+
+            <div class="row">
+                <div class="col-md-5">
+                    <mat-form-field>
+                        <mat-label>Amount</mat-label>
+                        <input matInput #DepositAmount type="number" min="1">
+                    </mat-form-field>
+                </div>
+                <div class="col-md-7">
+                    <button mat-raised-button color="primary" style="width: 20%;" (click)="deposit(DepositAmount.value)">Deposit</button>
+                </div>
+            </div>
+        </mat-expansion-panel>
+
+        <mat-expansion-panel>
+            <mat-expansion-panel-header>
+                <mat-panel-title>
+                    Transfer
+                </mat-panel-title>
+                <mat-panel-description>
+                    Type amount to be transfered
+                </mat-panel-description>
+            </mat-expansion-panel-header>
+
+            <div class="row">
+                <div class="col-md-4">
+                    <mat-form-field>
+                        <mat-label>Amount</mat-label>
+                        <input matInput type="number" min="1" #TransferAmount>
+                    </mat-form-field>
+                </div>
+                <div class="col-md-4">
+                    <mat-form-field>
+                        <mat-label>Customer Id</mat-label>
+                        <input matInput type="number" #CustomerId>
+                    </mat-form-field>
+                </div>
+                <div class="col-md-4">
+                    <button mat-raised-button color="primary" (click)="transfer(TransferAmount.value, CustomerId.value)">Transfer</button>
+                </div>
+            </div>
+        </mat-expansion-panel>
+
+    </mat-accordion>
+</div>
