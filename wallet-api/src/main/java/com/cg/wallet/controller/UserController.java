@@ -39,15 +39,8 @@ public class UserController {
 	}
 
 	@RequestMapping(method = RequestMethod.POST, value = "/user/add")
-	public void addUser(@RequestBody User user) throws UserAlreadyExistsException {
-		if(serviceRef.getUserByEmailId(user.getUserEmailId()).isEmpty()) {
-			serviceRef.addUser(user);
-			logger.info("User added Successfully");
-		}
-		else {
-			logger.error("Adding user failed..");
-			throw new UserAlreadyExistsException("This email Id is already being used");
-		}
+	public void addUser(@RequestBody User user) throws UserAlreadyExistsException {		
+		serviceRef.addUser(user);
 	}
 
 	@RequestMapping(method = RequestMethod.PUT, value = "/user/update")
@@ -58,16 +51,7 @@ public class UserController {
 
 	@RequestMapping("/user/email/{emailId}")
 	public List<User> getUserByEmailId(@PathVariable String emailId) throws UserNotFoundException  {
-		if (serviceRef.getUserByEmailId(emailId).isEmpty()) {
-			
-			logger.error("Email Id not found");
-			
-			throw new UserNotFoundException("This Email Id is not used by any user");
-		}
-		else {
-			logger.info("user retrieved successfully");
-			return serviceRef.getUserByEmailId(emailId);
-		}
+		return serviceRef.getUserByEmailId(emailId);
 	}
 	
 	@ExceptionHandler(value = UserNotFoundException.class)

@@ -13,6 +13,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import com.cg.wallet.exception.UserAlreadyExistsException;
+import com.cg.wallet.exception.UserNotFoundException;
 import com.cg.wallet.model.Transaction;
 import com.cg.wallet.model.User;
 import com.cg.wallet.service.TransactionService;
@@ -35,10 +37,11 @@ public class WalletSpringApplicationTest {
 	//Adding Customer
 	
 	@Test
-	public void testA() {
-		user = new User("Jonit", "Jonit@gmail.com", "pass1234");
+	public void testA() throws UserAlreadyExistsException {
+		user = new User("Jonit", "Jonita@gmail.com", "pass1234");
 		assertEquals(user, userService.addUser(user));
 	}
+
 	
 	//Get User By Id
 	@Test
@@ -56,7 +59,7 @@ public class WalletSpringApplicationTest {
 	
 	//getUserByEmail id
 	@Test
-	public void testD() {
+	public void testD() throws UserNotFoundException {
 		assertEquals(true, userService.getUserByEmailId(user.getUserEmailId()) != null);
 	}
 	
@@ -89,4 +92,15 @@ public class WalletSpringApplicationTest {
 		assertEquals(true, transactionService.getTransactionById(transaction.getTransactionId()) != null);
 	}
 	
+	//User already Exists Exeption
+	@Test(expected = UserAlreadyExistsException.class)
+	public void testJ() throws UserAlreadyExistsException {
+		user = new User("Jonit", "Jonita@gmail.com", "pass1234");
+		assertEquals(user, userService.addUser(user));
+	}
+	
+	@Test(expected = UserNotFoundException.class)
+	public void testK() throws UserNotFoundException {
+		assertEquals(true, !userService.getUserByEmailId("xyz@email.com").isEmpty());
+	}
 }
